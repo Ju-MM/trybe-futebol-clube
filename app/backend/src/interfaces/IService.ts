@@ -3,7 +3,7 @@ export interface IUser {
   password: string,
 }
 
-export interface IService<User> extends IUser {
+export interface IService<User> {
   list(): Promise<User[]>
   login(userInfo: IUser): Promise<string | null>
 }

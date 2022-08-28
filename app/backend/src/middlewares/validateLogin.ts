@@ -1,16 +1,16 @@
 import * as Joi from 'joi';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-export default function validateBody(req: Request, _res: Response) {
+export default function validateBody(req: Request, _res: Response, next: NextFunction) {
   const schema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required().min(6),
   });
 
-  const { error, value } = schema.validate(req.body);
+  const { error } = schema.validate(req.body);
   if (error) {
-    error.message = error.details[0].message;
+    error.message = 'All fields must be filled';
     throw error;
   }
-  return value;
+  next();
 }
