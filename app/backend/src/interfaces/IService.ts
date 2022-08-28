@@ -1,4 +1,9 @@
-export interface IService<T> {
-  list(): Promise<T[]>
-  // create(props: any): Promise<T>
+export interface IUser {
+  email: string,
+  password: string,
+}
+
+export interface IService<User> extends IUser {
+  list(): Promise<User[]>
+  login(userInfo: IUser): Promise<string | null>
 }
