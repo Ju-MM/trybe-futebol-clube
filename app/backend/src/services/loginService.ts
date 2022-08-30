@@ -8,6 +8,7 @@ import JwtService from '../utils/jwtService';
 class LoginService implements IService<User> {
   email: string;
   password: string;
+
   async list(): Promise<User[]> {
     const users: User[] = await User.findAll();
     return users;
@@ -26,10 +27,7 @@ class LoginService implements IService<User> {
       throw new NotFoundError('Incorrect email or password');
     }
 
-    const token = JwtService.createToken({
-      id: user.id,
-      email: user.email,
-    });
+    const token = JwtService.createToken(user);
 
     return token;
   }
