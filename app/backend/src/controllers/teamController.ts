@@ -9,6 +9,12 @@ class TeamController {
     const teams = await this.teamService.list();
     res.status(200).json(teams);
   }
+
+  async listTeam(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const team = await this.teamService.getTeam(Number(id));
+    res.status(200).json(team);
+  }
 }
 
 export default TeamController;
