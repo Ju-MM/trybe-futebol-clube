@@ -5,5 +5,5 @@
 
 export interface ITeamService<Team> {
   list(): Promise<Team[]>
-  getTeam(teamInfo: number): Promise<Team | null>
+  getTeam(id: number): Promise<Team | null>
 }

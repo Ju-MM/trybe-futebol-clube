@@ -3,8 +3,8 @@ import Team from '../database/models/team';
 import { ITeamService } from '../interfaces/ITeamService';
 
 class TeamService implements ITeamService<Team> {
-  id: number;
-  teamName: string;
+  // id: number;
+  // teamName: string;
 
   async list(): Promise<Team[]> {
     const teams: Team[] = await Team.findAll();
