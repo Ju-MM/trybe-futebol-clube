@@ -6,7 +6,15 @@ class MatchController {
   constructor(private matchService: IMatchService<Match>) { }
 
   async list(req: Request, res: Response): Promise<void> {
-    const matches = await this.matchService.list();
+    const { inProgress } = req.query;
+    const turnToBool = inProgress === 'true';
+    let matches: Match[] | undefined = [];
+
+    if (inProgress === undefined) {
+      matches = await this.matchService.list();
+    } else {
+      matches = await this.matchService.list(turnToBool);
+    }
     res.status(200).json(matches);
   }
 }

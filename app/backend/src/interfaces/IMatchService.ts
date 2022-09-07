@@ -1,3 +1,3 @@
 export interface IMatchService<Match> {
-  list(): Promise<Match[]>
+  list(inProgress?: boolean): Promise<Match[] | undefined>
 }
