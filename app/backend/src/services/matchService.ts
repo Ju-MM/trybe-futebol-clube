@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Match from '../database/models/match';
-import { IMatchService } from '../interfaces/IMatchService';
+import { IMatchService, IMatchInfos } from '../interfaces/IMatchService';
 import Teams from '../database/models/team';
 
 class MatchService implements IMatchService<Match> {
@@ -20,6 +20,11 @@ class MatchService implements IMatchService<Match> {
           include: this.includeTeamNameInfo });
     }
     return matches;
+  }
+
+  async create(matchInfos: IMatchInfos): Promise<object> {
+    const createdMatch = await Match.create(matchInfos);
+    return createdMatch;
   }
 }
 

@@ -17,6 +17,13 @@ class MatchController {
     }
     res.status(200).json(matches);
   }
+
+  async createMatch(req: Request, res: Response): Promise<void> {
+    // const data = await this.matchService.validateBody(req.body); // implementação futura
+    const matchInfo = req.body;
+    const allMatchInfo = await this.matchService.create(matchInfo);
+    res.status(201).json(allMatchInfo);
+  }
 }
 
 export default MatchController;
