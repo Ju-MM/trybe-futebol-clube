@@ -2,6 +2,8 @@
 import Match from '../database/models/match';
 import { IMatchService, IMatchInfos } from '../interfaces/IMatchService';
 import Teams from '../database/models/team';
+import TeamNotFoundError from '../middlewares/TeamNotFoundError';
+import EqualTeamsError from '../middlewares/EqualTeamsError';
 
 class MatchService implements IMatchService<Match> {
   includeTeamNameInfo = [{
@@ -22,9 +24,27 @@ class MatchService implements IMatchService<Match> {
     return matches;
   }
 
+  async validateBody({ homeTeam, awayTeam }: any): Promise<void> {
+    const homeTeamId = await Teams.findByPk(homeTeam);
+    const awayTeamId = await Teams.findByPk(awayTeam);
+
+    if (!homeTeamId || !awayTeamId) {
+      throw new TeamNotFoundError('There is no team with such id!');
+    }
+    if (homeTeamId.id === awayTeamId.id) {
+      throw new EqualTeamsError('It is not possible to create a match with two equal teams');
+    }
+  }
+
   async create(matchInfos: IMatchInfos): Promise<object> {
-    const createdMatch = await Match.create(matchInfos);
+    const createdMatch = await Match.create({ ...matchInfos, inProgress: true });
     return createdMatch;
+  }
+
+  async update(id: number): Promise<void> {
+    await Match.findByPk(id);
+    const updateId = { inProgress: false };
+    await Match.update(updateId, { where: { id } });
   }
 }
 

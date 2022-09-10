@@ -19,10 +19,15 @@ class MatchController {
   }
 
   async createMatch(req: Request, res: Response): Promise<void> {
-    // const data = await this.matchService.validateBody(req.body); // implementação futura
-    const matchInfo = req.body;
-    const allMatchInfo = await this.matchService.create(matchInfo);
+    await this.matchService.validateBody(req.body);
+    const allMatchInfo = await this.matchService.create(req.body);
     res.status(201).json(allMatchInfo);
+  }
+
+  async finishedMatch(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    await this.matchService.update(Number(id));
+    res.status(200).json({ message: 'Finished' });
   }
 }
 

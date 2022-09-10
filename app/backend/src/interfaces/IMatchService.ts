@@ -3,10 +3,12 @@ export interface IMatchInfos {
   awayTeam: string,
   homeTeamGoals: number,
   awayTeamGoals: number,
-  inProgress: true, // posso fazer assim?
+  inProgress?: boolean,
 }
 
 export interface IMatchService<Match> {
   list(inProgress?: boolean): Promise<Match[] | undefined>
+  validateBody({ homeTeam, awayTeam }: any): Promise<void >
   create(matchInfos: IMatchInfos): Promise<object>
+  update(id: number): Promise<void>
 }
