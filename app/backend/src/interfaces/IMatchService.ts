@@ -16,6 +16,5 @@ export interface IMatchService<Match> {
   validateBody({ homeTeam, awayTeam }: any): Promise<void >
   create(matchInfos: IMatchInfos): Promise<object>
   update(id: number): Promise<void>
-  findMatch(id: number, infoToChange: IChangeMatchInfos): Promise<object>
-  // updateMatch(infoToChange: IChangeMatchInfos, foundMatch: Match | null): Promise<IChangeMatchInfos>
+  findAndUpdateMatch(id: number, infoToChange: IChangeMatchInfos): Promise<object>
 }

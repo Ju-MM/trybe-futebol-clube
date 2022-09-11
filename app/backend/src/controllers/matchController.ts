@@ -32,18 +32,10 @@ class MatchController {
 
   async changeMatch(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const changedMatch = await this.matchService.findMatch(Number(id), req.body);
-    // const changedMatch = await this.matchService.updateMatch(req.body, foundMatch);
+    const changedMatch = await this.matchService.findAndUpdateMatch(Number(id), req.body);
     console.log(changedMatch);
     res.status(200).json(changedMatch);
   }
-
-  // async changeMatch(req: Request, res: Response): Promise<void> {
-  //   const { id } = req.params;
-  //   const foundMatch = await this.matchService.findMatch(Number(id));
-  //   const changedMatch = await this.matchService.updateMatch(req.body, foundMatch);
-  //   res.status(200).json(changedMatch);
-  // }
 }
 
 export default MatchController;

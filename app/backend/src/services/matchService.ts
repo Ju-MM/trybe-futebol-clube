@@ -47,12 +47,7 @@ class MatchService implements IMatchService<Match> {
     await Match.update(updateId, { where: { id } });
   }
 
-  // async findMatch(id: number): Promise<Match | null> {
-  //   const findMatch: Match | null = await Match.findByPk(id);
-  //   return findMatch;
-  // }
-
-  async findMatch(id: number, infoToChange: IChangeMatchInfos): Promise<object> {
+  async findAndUpdateMatch(id: number, infoToChange: IChangeMatchInfos): Promise<object> {
     await Match.findByPk(id);
     const changedInfo: object = await Match.update(infoToChange, { where: { id } });
     return changedInfo;
