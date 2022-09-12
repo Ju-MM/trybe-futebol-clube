@@ -33,7 +33,6 @@ class MatchController {
   async changeMatch(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const changedMatch = await this.matchService.findAndUpdateMatch(Number(id), req.body);
-    console.log(changedMatch);
     res.status(200).json(changedMatch);
   }
 }
