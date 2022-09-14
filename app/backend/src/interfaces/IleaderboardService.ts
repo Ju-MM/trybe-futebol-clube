@@ -12,6 +12,7 @@ export interface IleaderboardInfos {
 }
 
 export interface IleaderboardService{
+  listAllTeams(): Promise<IleaderboardInfos[]>
   listHomeTeam(): Promise<IleaderboardInfos[]>
   listAwayTeam(): Promise<IleaderboardInfos[]>
 }
