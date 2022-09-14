@@ -11,6 +11,7 @@ import User from '../database/models/user';
 import { CreateUserResponse, IUser } from '../interfaces/IService';
 import JwtService from '../utils/jwtService';
 import passwordService from '../utils/passwordService';
+// import validateBody from '../middlewares/validateLogin';
 
 chai.use(chaiHttp);
 
@@ -49,18 +50,16 @@ describe('Users', () => {
 
       sinon.restore();
     }) 
-  });
 
-  // describe('Login', () => { 
-  //   beforeEach(() => {
-      
-  //     sinon.stub(JwtService, "createToken").returns(createUserResponseMock.token)
-  //     sinon.stub(User, "findOne").resolves(usersMock as User)
-  //     sinon.stub(passwordService, "compare").returns(true);
+    it(`create token - fail validation`, async () => {
+      const response = await chai.request(app)
+        .post('/login')
+      sinon.stub(JwtService, "createToken").returns(createUserResponseMock.token)
+      sinon.stub(User, "findOne").resolves(usersMock as User)
+      sinon.stub(passwordService, "compare").returns(true);
+      expect(response.body).to.be.deep.equal({ message: 'All fields must be filled' });
      
-  //     })   
-  //   afterEach(() => {
-  //     sinon.restore();
-  //   })  
-  // })
+      sinon.restore();
+    }) 
+  });
 });
