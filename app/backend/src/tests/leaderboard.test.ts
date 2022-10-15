@@ -6,9 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 // import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
-import Team from '../database/models/team';
-import { ITeam } from '../interfaces/ITeamService';
+// import { Response } from 'superagent';
 import { IleaderboardInfos } from '../interfaces/IleaderboardService';
 import LeaderboardService from '../services/leaderboardService';
 
@@ -32,18 +30,20 @@ const leaderboardMock: IleaderboardInfos = {
 describe('Leaderboard', () => {
   describe('List home and away teams', () => {
     it(`. get home, should return status 200`, async () => {
-      
       const response = await chai.request(app)
         .get('/leaderboard/home')
-
       expect(response.status).to.equal(200);
     }) 
 
     it(`. get away, should return status 200`, async () => {
-      
       const response = await chai.request(app)
         .get('/leaderboard/away')
+      expect(response.status).to.equal(200);
+    }) 
 
+    it(`. get all, should return status 200`, async () => {
+      const response = await chai.request(app)
+        .get('/leaderboard')
       expect(response.status).to.equal(200);
     }) 
 
@@ -51,10 +51,22 @@ describe('Leaderboard', () => {
       sinon.stub(LeaderboardService.prototype, 'listHomeTeam').resolves([leaderboardMock]);
       const response = await chai.request(app)
         .get('/leaderboard/home')
-
       expect(response.body).to.be.deep.equal([leaderboardMock]);
     }) 
 
+    it(`should return away teams`, async () => {
+      sinon.stub(LeaderboardService.prototype, 'listAwayTeam').resolves([leaderboardMock]);
+      const response = await chai.request(app)
+        .get('/leaderboard/away')
+      expect(response.body).to.be.deep.equal([leaderboardMock]);
+    }) 
+
+    it(`should return all teams`, async () => {
+      sinon.stub(LeaderboardService.prototype, 'listAllTeams').resolves([leaderboardMock]);
+      const response = await chai.request(app)
+        .get('/leaderboard')
+      expect(response.body).to.be.deep.equal([leaderboardMock]);
+    }) 
  
   });
 });

@@ -6,6 +6,15 @@ export interface IMatchInfos {
   inProgress?: boolean,
 }
 
+export interface IMatchTest {
+  id: number,
+  homeTeam: string,
+  awayTeam: string,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+  inProgress?: boolean,
+}
+
 export interface IChangeMatchInfos {
   homeTeamGoals: number,
   awayTeamGoals: number,

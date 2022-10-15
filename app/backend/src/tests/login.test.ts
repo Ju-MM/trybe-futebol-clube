@@ -6,12 +6,9 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 // import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
+// import { Response } from 'superagent';
 import User from '../database/models/user';
 import { CreateUserResponse, IUser } from '../interfaces/IService';
-import JwtService from '../utils/jwtService';
-import passwordService from '../utils/passwordService';
-// import validateBody from '../middlewares/validateLogin';
 
 chai.use(chaiHttp);
 
@@ -30,14 +27,12 @@ const createUserResponseMock: CreateUserResponse = {
 }
 
 describe('Users', () => {
-  describe('List users', () => {
+  describe('Logins feats', () => {
     it(`. get, should return status 200`, async () => {
       sinon.stub(User, 'findAll').resolves([usersMock as User]);
       const response = await chai.request(app)
         .get('/login')
-
       expect(response.status).to.equal(200);
-
       sinon.restore();
     }) 
 
@@ -45,21 +40,16 @@ describe('Users', () => {
       sinon.stub(User, 'findAll').resolves([usersMock as User]);
       const response = await chai.request(app)
         .get('/login')
-
       expect(response.body).to.be.deep.equal([usersMock as User]);
-
       sinon.restore();
     }) 
 
-    it(`create token - fail validation`, async () => {
+    it(`Fail validation`, async () => {
       const response = await chai.request(app)
         .post('/login')
-      sinon.stub(JwtService, "createToken").returns(createUserResponseMock.token)
-      sinon.stub(User, "findOne").resolves(usersMock as User)
-      sinon.stub(passwordService, "compare").returns(true);
       expect(response.body).to.be.deep.equal({ message: 'All fields must be filled' });
-     
       sinon.restore();
     }) 
+
   });
 });
