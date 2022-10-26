@@ -8,6 +8,9 @@ Desenvolvido durante módulo de backend na Trybe[^1] | agosto/2022.
 <summary><strong>A aplicação</strong></summary><br />
 
 O `TFC` é um site informativo sobre partidas e classificações de futebol!
+
+![Exemplo app front](TFCgeral.png)
+
 </details>
 
 <details>
@@ -19,7 +22,7 @@ Construí um __backend dockerizado utilizando modelagem de dados através do Seq
 
 Foram respeitadas regras de negócio pré definidas pela Trybe, onde precisei garantir que a API desenvolvida fosse capaz de ser consumida pelo frontend provido dentro do projeto. 
 
-Destaco aqui, uma das regras principais nesse desenvolvimento: para adicionar uma partida ou fazer alterações, o usuário deve estar logado. __Essa verificação é feita através de um token válido__. 
+Destaco aqui uma das regras principais nesse desenvolvimento: para adicionar uma partida ou fazer alterações, o usuário deve estar logado. __Essa verificação é feita através de um token válido__. 
 
 Além disso, as tabelas `teams` e `matches` contam com um relacionamento para executar as devidas atualizações das partidas.
 </details>
@@ -111,25 +114,25 @@ Além disso, as tabelas `teams` e `matches` contam com um relacionamento para ex
 * Recorrer a mentorias para esclarecimento de dúvidas
 </details>
 
-## Evolução do Projeto
+## Para evolução do Projeto
 <details>
-<summary><strong>Metodologias utilizadas</strong></summary><br />
+<summary><strong>Destaques</strong></summary><br />
 
 * Refatoração: manipulação de erros e validações.
 * Testes: atingir cobertura de 100% da aplicação.
 </details>
 
+<!--
 ## 🚧 Como Instalar o Projeto | em construção 🚧
 
-<!--
 <details>
   <summary markdown="span"><strong>Tutorial</strong></summary><br />
 </details>
 -->
 
+<!--
 ## 🚧 Como Utilizar a Aplicação | em construção 🚧
 
-<!--
 <details>
   <summary markdown="span"><strong>Tutorial</strong></summary><br />
 </details>
