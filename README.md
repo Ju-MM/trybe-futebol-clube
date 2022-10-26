@@ -25,6 +25,8 @@ Foram respeitadas regras de negócio pré definidas pela Trybe, onde precisei ga
 Destaco aqui uma das regras principais nesse desenvolvimento: para adicionar uma partida ou fazer alterações, o usuário deve estar logado. __Essa verificação é feita através de um token válido__. 
 
 Além disso, as tabelas `teams` e `matches` contam com um relacionamento para executar as devidas atualizações das partidas.
+
+![Exemplo er-diagram](er-diagram.png)
 </details>
 
 <details>
